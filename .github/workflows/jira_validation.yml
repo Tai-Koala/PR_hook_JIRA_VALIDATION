@@ -13,4 +13,4 @@ jobs:
       - name: Print branch name
         if: github.event.review.state == 'approved'
         run: |
-          echo "Approve ✅  ${{ github.event.pull_request.base.ref }}"
+          echo "Approve ✅  ${{ github.event.pull_request.head.ref }}"

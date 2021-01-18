@@ -8,9 +8,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: job name
+      
+      # check PR state
+      - name: Is an approval PR
         if: github.event.review.state == 'approved'
-        env:
-            BASE_BRANCH: ${{ github.base_ref }}
         run: |
-          echo "Approved pull request's base branch is: ${BASE_BRANCH}"
+          echo "Approve ✅"
+      
+      # extract branch name on pull request
+      - name: Print branch name
+        if: github.event_name == 'pull_request'
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
+
+      # print branch name
+      - name: Get branch name
+        run: echo 'The branch name is' $BRANCH_NAME

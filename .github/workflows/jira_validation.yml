@@ -1,0 +1,16 @@
+on:
+  pull_request_review:
+    types: [submitted]
+    branches: ['master','dev']
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - name: job name
+        if: github.event.review.state == 'approved'
+        env:
+            BASE_BRANCH: ${{ github.base_ref }}
+        run: |
+          echo "Approved pull request's base branch is: ${BASE_BRANCH}"

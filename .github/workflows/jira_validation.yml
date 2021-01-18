@@ -9,16 +9,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      # check PR state
-      - name: Is an approval PR
+      # extract branch name on pull request
+      - name: Print branch name
         if: github.event.review.state == 'approved'
         run: |
           echo "Approve ✅"
-      
-      # extract branch name on pull request
-      - name: Print branch name
-        if: github.event_name == 'pull_request'
-        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
+          echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
 
       # print branch name
       - name: Get branch name

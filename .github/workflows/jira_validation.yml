@@ -1,3 +1,5 @@
+name: Jira pull request validation
+
 on:
   pull_request_review:
     types: [submitted]
@@ -5,12 +7,20 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 15.x]
+
     steps:
       - uses: actions/checkout@v2
-      
-      # extract branch name on pull request
-      - name: Print branch name
+      - name: LEGGO
         if: github.event.review.state == 'approved'
-        run: |
-          echo "Approve ✅  ${{ github.event.pull_request.head.ref }}"
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+        run: node jiraValidation.js
+        env: 
+          TICKET_ID: ${{ github.event.pull_request.head.ref }}

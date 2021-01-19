@@ -15,11 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2        
         
-      - name: Node modules install
-        if: github.event.review.state == 'approved'
+      - name: Set NodeJS
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
+
+      - name: Node modules install
+        if: github.event.review.state == 'approved'
         run: npm install
 
       - name: Run script

@@ -16,11 +16,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
       - name: LEGGO
         if: github.event.review.state == 'approved'
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-        run: node jiraValidation.js
+        
+      - run: node jiraValidation.js
         env: 
           TICKET_ID: ${{ github.event.pull_request.head.ref }}

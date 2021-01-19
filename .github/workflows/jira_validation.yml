@@ -10,19 +10,15 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
-
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: LEGGO
         if: github.event.review.state == 'approved'
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14.x
         
-      - run: node jiraValidation.js
+      - run: npm install && node jiraValidation.js
         env: 
           TICKET_ID: ${{ github.event.pull_request.head.ref }}

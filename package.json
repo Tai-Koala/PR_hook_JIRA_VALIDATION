@@ -1,0 +1,12 @@
+{
+  "name": "PR_hook_JIRA_VALIDATION",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Tai-Koala/PR_hook_JIRA_VALIDATION.git",
+  "author": "Tai LE <tle@neteck-fr.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0"
+  }
+}

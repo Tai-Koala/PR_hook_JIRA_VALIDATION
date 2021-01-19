@@ -13,9 +13,12 @@ jobs:
     environment: production
 
     steps:
-      - uses: actions/checkout@v2        
+      - name: Set Repo Git
+        if: github.event.review.state == 'approved'
+        uses: actions/checkout@v2        
         
       - name: Set NodeJS
+        if: github.event.review.state == 'approved'
         uses: actions/setup-node@v1
         with:
           node-version: 14.x

@@ -14,21 +14,21 @@ jobs:
 
     steps:
       - name: Set Repo Git
-        if: github.event.review.state == 'approved'
         uses: actions/checkout@v2        
         
+      - name: Check if is approved PR
+        if: github.event.review.state !== 'approved'
+        run: exit 1
+
       - name: Set NodeJS
-        if: github.event.review.state == 'approved'
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
 
       - name: Node modules install
-        if: github.event.review.state == 'approved'
         run: npm install
 
       - name: Run script
-        if: github.event.review.state == 'approved'
         run: node jiraValidation.js
         env: 
           TICKET_ID: ${{ github.event.pull_request.head.ref }}

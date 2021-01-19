@@ -6,20 +6,26 @@ on:
     branches: ['master','dev']
 
 jobs:
-  build:
+  jira_validation:
 
     runs-on: ubuntu-latest
+
+    environment: production
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: LEGGO
+      - name: Check if is approved PR
         if: github.event.review.state == 'approved'
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
         
-      - run: npm install && node jiraValidation.js
+      - name: Node modules install
+        run: npm install
+
+      - name: Run script
+        run: node jiraValidation.js
         env: 
           TICKET_ID: ${{ github.event.pull_request.head.ref }}
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}

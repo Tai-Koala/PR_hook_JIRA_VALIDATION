@@ -22,3 +22,5 @@ jobs:
       - run: npm install && node jiraValidation.js
         env: 
           TICKET_ID: ${{ github.event.pull_request.head.ref }}
+          JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
+          JIRA_API_KEY: ${{ secrets.JIRA_API_KEY }}

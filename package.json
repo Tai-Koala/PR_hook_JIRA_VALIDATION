@@ -5,6 +5,9 @@
   "repository": "git@github.com:Tai-Koala/PR_hook_JIRA_VALIDATION.git",
   "author": "Tai LE <tle@neteck-fr.com>",
   "license": "MIT",
+  "scripts": {
+    "jira:validation": "node jiraValidation.js"
+  },
   "dependencies": {
     "axios": "^0.21.1",
     "dotenv": "^8.2.0"

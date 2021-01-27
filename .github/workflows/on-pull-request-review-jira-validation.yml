@@ -5,6 +5,8 @@ on:
     types: [submitted]
     branches:
       - 'WLD-*'
+      - '!develop'
+      - '!master'
 
 jobs:
   test:

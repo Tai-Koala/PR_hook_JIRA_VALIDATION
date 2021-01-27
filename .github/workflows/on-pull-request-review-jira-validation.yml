@@ -3,13 +3,12 @@ name: Jira validation
 on:
   pull_request_review:
     types: [submitted]
-    branches: ['develop']
+    branches:
+      - 'WLD-*'
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    environment: production
 
     steps:
       - name: Checkout
@@ -41,7 +40,7 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-${{ matrix.node-version }}-nodemodules2-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}-nodemodules2-        
+            ${{ runner.os }}-${{ matrix.node-version }}-nodemodules2-
 
       - run: yarn
         if: |
@@ -50,8 +49,8 @@ jobs:
 
       - name: Run script
         run: yarn jira:validation
-        env: 
+        env:
           TICKET_ID: ${{ github.event.pull_request.head.ref }}
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
           JIRA_API_KEY: ${{ secrets.JIRA_API_KEY }}
-          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          JIRA_API_BASE_URL: ${{ secrets.JIRA_API_BASE_URL }}

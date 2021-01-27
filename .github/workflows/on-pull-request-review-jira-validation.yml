@@ -4,9 +4,7 @@ on:
   pull_request_review:
     types: [submitted]
     branches:
-      - 'WLD-*'
       - '!develop'
-      - '!master'
 
 jobs:
   test:

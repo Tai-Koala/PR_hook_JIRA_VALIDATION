@@ -26,7 +26,7 @@ const auth = {
         return (
           issue.type.inward === 'is blocked by' &&
           'inwardIssue' in issue &&
-          issue.inwardIssue.fields.status.statusCategory.id !== 3
+          !['10000', '10623'].includes(issue.inwardIssue.fields.status.id)
         );
       });
 

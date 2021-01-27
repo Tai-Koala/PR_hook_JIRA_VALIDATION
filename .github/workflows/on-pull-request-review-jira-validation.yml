@@ -3,7 +3,7 @@ name: Jira validation
 on:
   pull_request_review:
     types: [submitted]
-    branches-ignore: 
+    branches-ignore:
       - 'master'
 
 jobs:

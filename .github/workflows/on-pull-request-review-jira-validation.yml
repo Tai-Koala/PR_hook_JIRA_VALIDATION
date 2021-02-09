@@ -18,6 +18,12 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Check if is approved PR
+        if: github.event.review.state != 'approved'
+        run: |
+          echo "PR review status is ${{ github.event.review.state }}"
+          exit 1
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
